@@ -21,6 +21,7 @@ public class Account {
 	{
 		this.idAccount = nextId.getAndIncrement();
 		this.customerId = customerId;
+		this.balance = 0;
 	}
 	
 	public Long getIdAccount() {
