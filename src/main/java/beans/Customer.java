@@ -65,9 +65,9 @@ public class Customer {
 		this.idAccounts =  idAccounts;
 	}
 	
-	public Account createAccount(Long customerId)
+	public Account createAccount(Long customerId, double overdraft)
 	{
-		Account account = new Account(customerId);
+		Account account = new Account(customerId, overdraft);
 		this.idAccounts.add(account.getIdAccount());
 		return account;
 	}

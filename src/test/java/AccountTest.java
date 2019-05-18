@@ -30,12 +30,12 @@ public class AccountTest {
 	@Test
 	public void makeWithdrawalBalaceExcessFailure()
 	{
-	   accountTest  = new Account(1L);
+	   accountTest  = new Account(1L, 300f);
 	   accountTest.setBalance(500f);
 	
 	   Mockito.when(accountService.getAccount(Mockito.anyLong())).thenReturn(accountTest);
 	 
-	   Assert.assertEquals (accountService.getAccount(22L).makeWithdrawal(501f), Constants.INSUFFICIENT_BLANCE);
+	   Assert.assertEquals (accountService.getAccount(22L).makeWithdrawal(801f), Constants.INSUFFICIENT_BLANCE);
 		
 	}
 	
@@ -43,7 +43,7 @@ public class AccountTest {
 	@Test
 	public void makeWithdrawalSuccess()
 	{
-	   Account accountTest = new Account(2L);
+	   Account accountTest = new Account(2L, 300f);
 	   accountTest.setBalance(500f);
 	   Mockito.when(accountService.getAccount(Mockito.anyLong())).thenReturn(accountTest);
 		 

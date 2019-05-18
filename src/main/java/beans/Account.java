@@ -12,48 +12,51 @@ public class Account {
 	private final Long idAccount;
 	
 	/** Banking account data information **/
-	private volatile float balance;
+	private volatile double balance;
 	private Long customerId;
-	private float previousBalance;
-	
-	
-	public Account(Long customerId)
+	private double overdraft;
+
+	public Account(Long customerId, double overdraft)
 	{
 		this.idAccount = nextId.getAndIncrement();
 		this.customerId = customerId;
 		this.balance = 0;
+		this.overdraft = overdraft;
 	}
+	
 	
 	public Long getIdAccount() {
 		return idAccount;
 	}
-	
-	
 	public Long getCustomerId() {
 		return customerId;
 	}
-
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
-	public float getBalance() {
+	public double getBalance() {
 		return balance;
 	}
-	public void setBalance(float balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-	
-	public float getPreviousBalance() {
-		return previousBalance;
+	public double getOverdraft() {
+		return overdraft;
 	}
-	public void setPreviousBalance(float previousBalance) {
-		this.previousBalance = previousBalance;
+	public void setOverdraft(double overdraft) {
+		this.overdraft = overdraft;
 	}
 	
 	
-	public String makeWithdrawal(float amount)
+	
+	
+	public String makeWithdrawal(double amount)
 	{
-		if(this.balance < amount)
+		if(amount<=0)
+		{
+			return Constants.INVALID_AMOUNT;
+		}
+		if((overdraft + balance) < amount)
 			return Constants.INSUFFICIENT_BLANCE;
 		else
 		{
@@ -65,11 +68,14 @@ public class Account {
 		
 	}
 	
-	public void makeADeposit(float amount)
+	public String makeADeposit(double amount)
 	{
-		this.previousBalance = balance;
+		if(amount<=0)
+		{
+			return Constants.INVALID_AMOUNT;
+		}
 		this.balance += amount;
-		
+		return Constants.SUCCESSFUL_DEPOSIT;
 	}
 	
 	

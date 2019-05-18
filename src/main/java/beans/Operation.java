@@ -6,13 +6,13 @@ public class Operation {
 	
 	
 	private int operation;
-	private float balance;
+	private double balance;
 	private Calendar date;
-	private float amount ;
+	private double amount ;
 	private Long idAccount;
 	
 	
-	public Operation(float balance, Calendar date, float amount, Long idAccount )
+	public Operation(double balance, Calendar date, double amount, Long idAccount )
 	{
 		this.amount= amount;
 		this.idAccount = idAccount;
@@ -32,10 +32,10 @@ public class Operation {
 	public void setOperation(int operation) {
 		this.operation = operation;
 	}
-	public float getBalance() {
+	public double getBalance() {
 		return balance;
 	}
-	public void setBalance(float balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 	public Calendar getDate() {
@@ -44,7 +44,7 @@ public class Operation {
 	public void setDate(Calendar date) {
 		this.date = date;
 	}
-	public float getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 	public void setAmount(float amount) {
