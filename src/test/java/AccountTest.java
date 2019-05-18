@@ -16,39 +16,75 @@ public class AccountTest {
 	ApplicationContext appContext = new FileSystemXmlApplicationContext("src/main/resources/app-context.xml");
 	Service accountService = appContext.getBean("service", Service.class);
 
-	private Account accountTest;
-	 
+	
+	 private Account accountTest;
 	 
 	@org.junit.Before
 	public void initTest() 
 	{
 	    accountService = Mockito.mock(Service.class);
+	    accountTest = new Account(1L, 300f);
+		Mockito.when(accountService.getAccount(Mockito.anyLong())).thenReturn(accountTest);
 	}
 	 
-	 
+	
+	/** ###################################################################### **/
+	/** Test cases to build the Withdrawal Functionality **/
+	/** ###################################################################### **/
+	
 	@SuppressWarnings("deprecation")
 	@Test
 	public void makeWithdrawalBalaceExcessFailure()
 	{
-	   accountTest  = new Account(1L, 300f);
 	   accountTest.setBalance(500f);
-	
 	   Mockito.when(accountService.getAccount(Mockito.anyLong())).thenReturn(accountTest);
-	 
 	   Assert.assertEquals (accountService.getAccount(22L).makeWithdrawal(801f), Constants.INSUFFICIENT_BLANCE);
 		
+	}
+	
+	@Test
+	public void makeWithdrawalNegativeAmount()
+	{		 
+	   Assert.assertEquals (accountService.getAccount(22L).makeWithdrawal(-1f), Constants.INVALID_AMOUNT);			
+	}
+	
+	@Test
+	public void makeWithdrawalZeroAmount()
+	{
+	 	 
+	   Assert.assertEquals (accountService.getAccount(22L).makeWithdrawal(0f), Constants.INVALID_AMOUNT);	
 	}
 	
 	@SuppressWarnings("deprecation")
 	@Test
 	public void makeWithdrawalSuccess()
 	{
-	   Account accountTest = new Account(2L, 300f);
 	   accountTest.setBalance(500f);
 	   Mockito.when(accountService.getAccount(Mockito.anyLong())).thenReturn(accountTest);
 		 
-	   /**Mettre des messages dans des fichiers propriétés  **/
-	   Assert.assertEquals (accountService.getAccount(22L).makeWithdrawal(499f), Constants.SUCCESSFUL_WITHDRAWAL);
+	   Assert.assertEquals (accountService.getAccount(22L).makeWithdrawal(800f), Constants.SUCCESSFUL_WITHDRAWAL);
 			
+	}
+	
+	/** ###################################################################### **/
+	/** Test cases to build the deposit Functionality **/
+	/** ###################################################################### **/
+	
+	@Test
+	public void makeDepositNegativeAmount()
+	{  		 
+	  Assert.assertEquals (accountService.getAccount(22L).makeADeposit(-1f), Constants.INVALID_AMOUNT);			
+	}
+	
+	@Test
+	public void makeDepositZeroAmount()
+	{  		 
+	  Assert.assertEquals (accountService.getAccount(22L).makeADeposit(0f), Constants.INVALID_AMOUNT);			
+	}
+	
+	@Test
+	public void makeDepositSuccess()
+	{  		 
+	  Assert.assertEquals (accountService.getAccount(22L).makeADeposit(100f), Constants.SUCCESSFUL_DEPOSIT );			
 	}
 }

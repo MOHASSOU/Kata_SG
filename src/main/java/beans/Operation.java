@@ -2,46 +2,51 @@ package main.java.beans;
 
 import java.util.Calendar;
 
+import main.java.transverse.UtilClass;
+import main.java.transverse.UtilClass.operationType;
+
 public class Operation {
 	
-	
-	private int operation;
+	/** The type of the operation **/
+	private String type;
+	/** The balance after the operation is made **/
 	private double balance;
-	private Calendar date;
+	/** The date of the operation **/
+	private String date;
+	/** The amount of the operation **/
 	private double amount ;
-	private Long idAccount;
+	/** The operation's account id**/
+	private Long accountId;
 	
 	
-	public Operation(double balance, Calendar date, double amount, Long idAccount )
+	public Operation(double balance, Calendar date, double amount, Long accountId, operationType operationType )
 	{
 		this.amount= amount;
-		this.idAccount = idAccount;
-		this.date = date;
+		this.accountId = accountId;
+		this.date = UtilClass.getStringFromCalendar(date);
 		this.balance = balance;
+		this.type = operationType.name().toString();
+		
 	}
 	
-	public Long getIdAccount() {
-		return idAccount;
+	
+	public Long getAccountId() {
+		return accountId;
 	}
-	public void setIdAccount(Long idAccount) {
-		this.idAccount = idAccount;
+	public void setAccountId(Long accountId) {
+		this.accountId = accountId;
 	}
-	public int getOperation() {
-		return operation;
-	}
-	public void setOperation(int operation) {
-		this.operation = operation;
-	}
+	
 	public double getBalance() {
 		return balance;
 	}
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-	public Calendar getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Calendar date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public double getAmount() {
@@ -49,6 +54,12 @@ public class Operation {
 	}
 	public void setAmount(float amount) {
 		this.amount = amount;
+	}
+	
+	@Override
+	public String toString() {
+		return "Operation [type=" + type + ", balance=" + balance + ", date=" + date + ", amount=" + amount
+				+ ", idAccount=" + accountId + "]";
 	}
 
 }

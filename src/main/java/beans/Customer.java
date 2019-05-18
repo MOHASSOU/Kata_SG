@@ -6,12 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Customer {
 	
-	 @Override
-	public String toString() {
-		return "Customer [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", address=" + address + ", idAccounts=" + idAccounts + "]";
-	}
-
+	
 	/** To generate a unique id for each customer **/
 	 private static AtomicLong nextId = new AtomicLong(1);
 	 private final Long customerId; 
@@ -64,6 +59,11 @@ public class Customer {
 	public void setIdAccounts(List<Long> idAccounts) {
 		this.idAccounts =  idAccounts;
 	}
+	 @Override
+		public String toString() {
+			return "Customer [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName
+					+ ", address=" + address + ", idAccounts=" + idAccounts + "]";
+		}
 	
 	public Account createAccount(Long customerId, double overdraft)
 	{

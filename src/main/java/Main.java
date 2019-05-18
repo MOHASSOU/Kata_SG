@@ -2,6 +2,9 @@ package main.java;
 
 import java.util.Scanner;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
+import org.eclipse.jdt.internal.compiler.ast.ForeachStatement;
+
 import main.java.beans.Account;
 import main.java.beans.Customer;
 import main.java.transverse.UtilClass;
@@ -14,7 +17,6 @@ public class Main {
 		Account a1 =  c1.createAccount(c1.getCustomerId(), 300f);
 		//c1.createAccount(c1.getCustomerId());
 		
-		boolean quit = false;
 		System.out.println("==============================================================");
 		System.out.println("Welcome dear "+ c1.getFirstName() +", what do you want from your bank today ?");
 		System.out.println("==============================================================");
@@ -22,11 +24,11 @@ public class Main {
 		if(c1.getIdAccounts().size() == 1)
 		{
 		
-		System.out.println("A : Check the balance \nB : Make a withdrawal \nC : Make a deposit \nD : Check the personal information \nE : Quit ");
+		System.out.println("A : Check the balance \nB : Make a withdrawal \nC : Make a deposit \nD : Check the personal information \nE : Display the operations history \nF : Quit");
 		char choice;
+		Scanner sc = new Scanner(System.in);
 		do
 		{
-		Scanner sc = new Scanner(System.in);
 		choice = sc.next().charAt(0);
 		
 		switch (choice) {
@@ -50,15 +52,17 @@ public class Main {
 			System.out.println(c1.toString());
 			break;
 		case 'E':
+			a1.getOperationList().forEach(i->System.out.println(i.toString()));
+			break;
+		case 'F':
 			System.out.println("Thank you for your visit, see you soon :)");
-			quit = true;
 			break;
 		default:
 			System.out.println("Invalid choice, please retry again.");
 			break;
 		}
 		}
-		while(choice != 'E');
+		while(choice != 'F');
 		}
 		
 		
