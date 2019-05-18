@@ -13,8 +13,6 @@ import services.Service;
 
 public class AccountTest {
 
-	
-	
 	ApplicationContext appContext = new FileSystemXmlApplicationContext("src/main/resources/app-context.xml");
 	Service accountService = appContext.getBean("service", Service.class);
 
@@ -32,13 +30,12 @@ public class AccountTest {
 	@Test
 	public void makeWithdrawalBalaceExcessFailure()
 	{
-	   accountTest  = new Account(1);
+	   accountTest  = new Account(1L);
 	   accountTest.setBalance(500f);
 	
-	   Mockito.when(accountService.getAccount(Mockito.anyInt())).thenReturn(accountTest);
+	   Mockito.when(accountService.getAccount(Mockito.anyLong())).thenReturn(accountTest);
 	 
-	   /**Mettre des messages dans des fichiers propriétés  **/
-	   Assert.assertEquals (accountService.getAccount(22).makeWithdrawal(501f), Constants.INSUFFICIENT_BLANCE);
+	   Assert.assertEquals (accountService.getAccount(22L).makeWithdrawal(501f), Constants.INSUFFICIENT_BLANCE);
 		
 	}
 	
@@ -46,12 +43,12 @@ public class AccountTest {
 	@Test
 	public void makeWithdrawalSuccess()
 	{
-	   Account accountTest = new Account(2);
+	   Account accountTest = new Account(2L);
 	   accountTest.setBalance(500f);
-	   Mockito.when(accountService.getAccount(Mockito.anyInt())).thenReturn(accountTest);
+	   Mockito.when(accountService.getAccount(Mockito.anyLong())).thenReturn(accountTest);
 		 
 	   /**Mettre des messages dans des fichiers propriétés  **/
-	   Assert.assertEquals (accountService.getAccount(22).makeWithdrawal(499f), Constants.SUCCESSFUL_WITHDRAWAL);
+	   Assert.assertEquals (accountService.getAccount(22L).makeWithdrawal(499f), Constants.SUCCESSFUL_WITHDRAWAL);
 			
 	}
 }

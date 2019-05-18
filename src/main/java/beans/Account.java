@@ -1,32 +1,52 @@
 package main.java.beans;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import main.java.transverse.Constants;
 import main.java.transverse.UtilClass;
 
 public class Account {
 
+	/** To generate a unique id for each account **/
+	private static AtomicLong nextId = new AtomicLong(1);
+	private final Long idAccount;
 	
-	private int idAccount;
+	/** Banking account data information **/
 	private volatile float balance;
-	private int idClient;
+	private Long customerId;
+	private float previousBalance;
 	
 	
-	public Account(int idAccount)
+	public Account(Long customerId)
 	{
-		this.idAccount = idAccount;
+		this.idAccount = nextId.getAndIncrement();
+		this.customerId = customerId;
 	}
 	
-	public int getIdAccount() {
+	public Long getIdAccount() {
 		return idAccount;
 	}
-	public void setIdAccount(int idAccount) {
-		this.idAccount = idAccount;
+	
+	
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 	public float getBalance() {
 		return balance;
 	}
 	public void setBalance(float balance) {
 		this.balance = balance;
+	}
+	
+	public float getPreviousBalance() {
+		return previousBalance;
+	}
+	public void setPreviousBalance(float previousBalance) {
+		this.previousBalance = previousBalance;
 	}
 	
 	
@@ -46,12 +66,10 @@ public class Account {
 	
 	public void makeADeposit(float amount)
 	{
+		this.previousBalance = balance;
+		this.balance += amount;
 		
 	}
 	
-	public void createAccount()
-	{
-		
-	}
 	
 }

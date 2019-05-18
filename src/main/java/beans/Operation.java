@@ -9,10 +9,10 @@ public class Operation {
 	private float balance;
 	private Calendar date;
 	private float amount ;
-	private int idAccount;
+	private Long idAccount;
 	
 	
-	public Operation(float balance, Calendar date, float amount, int idAccount )
+	public Operation(float balance, Calendar date, float amount, Long idAccount )
 	{
 		this.amount= amount;
 		this.idAccount = idAccount;
@@ -20,10 +20,10 @@ public class Operation {
 		this.balance = balance;
 	}
 	
-	public int getIdAccount() {
+	public Long getIdAccount() {
 		return idAccount;
 	}
-	public void setIdAccount(int idAccount) {
+	public void setIdAccount(Long idAccount) {
 		this.idAccount = idAccount;
 	}
 	public int getOperation() {
