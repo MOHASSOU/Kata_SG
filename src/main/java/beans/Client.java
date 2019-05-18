@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Client {
 
-	private String firstName;
+	 private String firstName;
 	 private String lastName;
 	 private String address;
 	 private List <Integer> idAccounts;
