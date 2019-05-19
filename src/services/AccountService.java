@@ -6,20 +6,15 @@ import main.java.beans.Operation;
 import main.java.transverse.Constants;
 import main.java.transverse.UtilClass;
 
-public class Service {
+public class AccountService {
 
 	
-	public Account getAccount(Long idAccount)
+	public Account getAccountById(Long accountId)
 	{
 		/** Call the sub layers to retrieve data **/
 		return null;
 	}
 	
-	public Customer getClient(int idClient)
-	{
-		/** Call the sub layers to retrieve data **/
-		return null;
-	}
 	
 	
 	public Account createAccount(Customer customer, double overdraft)
@@ -28,15 +23,6 @@ public class Service {
 		customer.getIdAccounts().add(account.getIdAccount());
 		return account;
 		
-	}
-	
-	public Customer createCustomer(String firstName, String lastName, String address) throws Exception
-	{
-		if(firstName == null || lastName == null || address == null)
-		{
-			throw new Exception(Constants.NULL_OR_INVALID_INFORMATION);		
-		}
-		return new Customer(firstName, lastName, address);	
 	}
 	
 	public String makeADeposit(Account account, double amount)

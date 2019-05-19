@@ -10,12 +10,13 @@ import junit.framework.Assert;
 import main.java.beans.Account;
 import main.java.beans.Customer;
 import main.java.transverse.Constants;
-import services.Service;
+import services.AccountService;
+import services.CustomerService;
 
 public class CustomerTest {
 
 	ApplicationContext appContext = new FileSystemXmlApplicationContext("src/main/resources/app-context.xml");
-	Service accountService = new Service();
+	CustomerService customerService = appContext.getBean("customerService", CustomerService.class);
 	/** ###################################################################### **/
 	/** Test cases to build the create Customer Functionality **/
 	/** ###################################################################### 
@@ -26,7 +27,7 @@ public class CustomerTest {
 	public void createCustomerSuccess() throws Exception
 	{  	
 	
-	 Customer customer = accountService.createCustomer("firstNameTest", "lastNameTest", "addressTest");	
+	 Customer customer = customerService.createCustomer("firstNameTest", "lastNameTest", "addressTest");	
 	 Assert.assertEquals (customer.getFirstName(), "firstNameTest" );
 	 Assert.assertEquals (customer.getLastName(), "lastNameTest" );
 	 Assert.assertEquals (customer.getAddress(), "addressTest" );
@@ -37,7 +38,7 @@ public class CustomerTest {
 	public void createCustomerInvalidParameters() 
 	{  	
 	try {
-		accountService.createCustomer(null, null, null);
+		customerService.createCustomer(null, null, null);
 	} catch (Exception e) {
 		Assert.assertEquals (e.getMessage(), Constants.NULL_OR_INVALID_INFORMATION );
 	}	
