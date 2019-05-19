@@ -1,24 +1,20 @@
 package main.java;
 
 import java.util.Scanner;
-
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
-import org.eclipse.jdt.internal.compiler.ast.ForeachStatement;
-
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import main.java.beans.Account;
 import main.java.beans.Customer;
-import main.java.transverse.UtilClass;
 import services.AccountService;
 import services.CustomerService;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
+		ApplicationContext appContext = new FileSystemXmlApplicationContext("src/main/resources/app-context.xml");
+		AccountService accountService = appContext.getBean("accountService", AccountService.class);
+		CustomerService customerService = appContext.getBean("customerService", CustomerService.class);
 		
-		AccountService accountService = new AccountService();
-		CustomerService customerService = new CustomerService();
-		
-
 		Customer c1 = customerService.createCustomer("Mohand", "HASSOUNA", "25 rue de Cuques");
 		Account a1 =  accountService.createAccount(c1, 300f);
 		//Account a2 =  service.createAccount(c1.getCustomerId(), 300f);
@@ -26,6 +22,7 @@ public class Main {
 		System.out.println("==============================================================");
 		System.out.println("Welcome dear "+ c1.getFirstName() +", what do you want from your bank today ?");
 		System.out.println("==============================================================");
+		
 		/** case : the customer has just one account **/
 		if(c1.getIdAccounts().size() == 1)
 		{
@@ -58,7 +55,7 @@ public class Main {
 			System.out.println(c1.toString());
 			break;
 		case 'E':
-			a1.getOperationList().forEach(i->System.out.println(i.toString()));
+			accountService.getAccountsLastOperations(a1).forEach(o->System.out.println(o));
 			break;
 		case 'F':
 			System.out.println("Thank you for your visit, see you soon :)");

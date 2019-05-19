@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import main.java.transverse.Constants;
-import main.java.transverse.UtilClass;
-
 public class Account {
 
 	/** To generate a unique id for each account **/

@@ -1,12 +1,13 @@
 package test.java;
 
+import java.util.List;
+
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import junit.framework.Assert;
+import org.junit.Assert; 
 import main.java.beans.Account;
 import main.java.transverse.Constants;
 import services.AccountService;
@@ -32,7 +33,6 @@ public class AccountTest {
 	/** Test cases to build the Withdrawal Functionality **/
 	/** ###################################################################### **/
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void makeWithdrawalBalaceExcessFailure()
 	{
@@ -55,7 +55,6 @@ public class AccountTest {
 	   Assert.assertEquals (accountService.makeWithdrawal(accountMockedService.getAccountById(22L), 0f), Constants.INVALID_AMOUNT);	
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void makeWithdrawalSuccess()
 	{
@@ -86,6 +85,47 @@ public class AccountTest {
 	public void makeDepositSuccess()
 	{  		 
 	  Assert.assertEquals (accountService.makeADeposit(accountMockedService.getAccountById(22L), 100f), Constants.SUCCESSFUL_DEPOSIT );			
+	}
+	
+	/** ###################################################################### **/
+	/** Test cases to build the get Operations Functionality **/
+	/** ###################################################################### 
+	 * @throws Exception **/
+	
+	@Test
+	public void getOperationsSuccess() throws Exception
+	{  		 
+		Account a1 =  accountMockedService.getAccountById(22L);
+		accountService.makeADeposit(a1, 22f);
+		List<String> operations = accountService.getAccountsLastOperations(a1);
+		 Assert.assertNotNull(operations.get(0));		
+	}
+	@Test
+	public void getOperationsWithInvalidCustomer() 
+	{  		 
+		Account a1 =  accountMockedService.getAccountById(22L);
+		accountService.makeADeposit(a1, 22f);
+		a1.setCustomerId(null);
+		try {
+			accountService.getAccountsLastOperations(a1);
+		} catch (Exception e) {
+			Assert.assertEquals(e.getMessage(), Constants.INVALID_CUSTOMER);
+		}
+			
+	}
+	
+	@Test
+	public void getOperationsWithInvalidAccount() 
+	{  		 
+		Account a1 =  accountMockedService.getAccountById(22L);
+		accountService.makeADeposit(a1, 22f);
+		a1 = null;
+		try {
+			accountService.getAccountsLastOperations(a1);
+		} catch (Exception e) {
+			Assert.assertEquals(e.getMessage(), Constants.INVALID_ACCOUNT);
+		}
+			
 	}
 	
 	

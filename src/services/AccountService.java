@@ -1,5 +1,7 @@
 package services;
 
+import java.util.ArrayList;
+import java.util.List;
 import main.java.beans.Account;
 import main.java.beans.Customer;
 import main.java.beans.Operation;
@@ -54,5 +56,21 @@ public class AccountService {
 			
 		}
 		
+	}
+	
+	public List<String> getAccountsLastOperations(Account account) throws Exception
+	{
+		if(account == null || account.getIdAccount() == null )
+		{
+			throw new Exception(Constants.INVALID_ACCOUNT);
+		}
+		if( account.getCustomerId() == null)
+		{
+			throw new Exception(Constants.INVALID_CUSTOMER);
+
+		}
+		List <String> operationList = new ArrayList<String>();
+		account.getOperationList().forEach(i-> operationList.add(i.toString()));
+		return operationList;
 	}
 }

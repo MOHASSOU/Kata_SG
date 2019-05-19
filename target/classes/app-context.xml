@@ -10,6 +10,8 @@
 
 <bean id="accountService" class="services.AccountService"></bean>
 <bean id="customerService" class="services.CustomerService"></bean>
+
+
 	
 
 </beans>

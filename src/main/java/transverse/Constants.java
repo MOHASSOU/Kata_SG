@@ -6,5 +6,7 @@ public class Constants {
 	public static final String SUCCESSFUL_DEPOSIT = "successful deposit";
 	public static final String INVALID_AMOUNT = "invalid amount";
 	public static final String NULL_OR_INVALID_INFORMATION = "null or invalid information";
+	public static final String INVALID_ACCOUNT = "invalid account";
+	public static final String INVALID_CUSTOMER = "invalid customer";
 	
 }

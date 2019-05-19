@@ -1,10 +1,7 @@
 package services;
 
-import main.java.beans.Account;
 import main.java.beans.Customer;
-import main.java.beans.Operation;
 import main.java.transverse.Constants;
-import main.java.transverse.UtilClass;
 
 public class CustomerService {
 
