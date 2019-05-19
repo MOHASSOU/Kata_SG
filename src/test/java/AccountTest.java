@@ -14,17 +14,17 @@ import services.Service;
 public class AccountTest {
 
 	ApplicationContext appContext = new FileSystemXmlApplicationContext("src/main/resources/app-context.xml");
+	Service accountMockedService = appContext.getBean("service", Service.class);
 	Service accountService = appContext.getBean("service", Service.class);
-
 	
 	 private Account accountTest;
 	 
 	@org.junit.Before
 	public void initTest() 
 	{
-	    accountService = Mockito.mock(Service.class);
+	    accountMockedService = Mockito.mock(Service.class);
 	    accountTest = new Account(1L, 300f);
-		Mockito.when(accountService.getAccount(Mockito.anyLong())).thenReturn(accountTest);
+		Mockito.when(accountMockedService.getAccount(Mockito.anyLong())).thenReturn(accountTest);
 	}
 	 
 	
@@ -37,22 +37,22 @@ public class AccountTest {
 	public void makeWithdrawalBalaceExcessFailure()
 	{
 	   accountTest.setBalance(500f);
-	   Mockito.when(accountService.getAccount(Mockito.anyLong())).thenReturn(accountTest);
-	   Assert.assertEquals (accountService.getAccount(22L).makeWithdrawal(801f), Constants.INSUFFICIENT_BLANCE);
+	   Mockito.when(accountMockedService.getAccount(Mockito.anyLong())).thenReturn(accountTest);
+	   Assert.assertEquals (accountService.makeWithdrawal(accountMockedService.getAccount(22L), 801f), Constants.INSUFFICIENT_BLANCE);
 		
 	}
 	
 	@Test
 	public void makeWithdrawalNegativeAmount()
 	{		 
-	   Assert.assertEquals (accountService.getAccount(22L).makeWithdrawal(-1f), Constants.INVALID_AMOUNT);			
+	   Assert.assertEquals (accountService.makeWithdrawal(accountMockedService.getAccount(22L), -1f), Constants.INVALID_AMOUNT);			
 	}
 	
 	@Test
 	public void makeWithdrawalZeroAmount()
 	{
 	 	 
-	   Assert.assertEquals (accountService.getAccount(22L).makeWithdrawal(0f), Constants.INVALID_AMOUNT);	
+	   Assert.assertEquals (accountService.makeWithdrawal(accountMockedService.getAccount(22L), 0f), Constants.INVALID_AMOUNT);	
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -60,9 +60,9 @@ public class AccountTest {
 	public void makeWithdrawalSuccess()
 	{
 	   accountTest.setBalance(500f);
-	   Mockito.when(accountService.getAccount(Mockito.anyLong())).thenReturn(accountTest);
+	   Mockito.when(accountMockedService.getAccount(Mockito.anyLong())).thenReturn(accountTest);
 		 
-	   Assert.assertEquals (accountService.getAccount(22L).makeWithdrawal(800f), Constants.SUCCESSFUL_WITHDRAWAL);
+	   Assert.assertEquals (accountService.makeWithdrawal(accountMockedService.getAccount(22L), 800f), Constants.SUCCESSFUL_WITHDRAWAL);
 			
 	}
 	
@@ -73,18 +73,20 @@ public class AccountTest {
 	@Test
 	public void makeDepositNegativeAmount()
 	{  		 
-	  Assert.assertEquals (accountService.getAccount(22L).makeADeposit(-1f), Constants.INVALID_AMOUNT);			
+	  Assert.assertEquals (accountService.makeADeposit(accountMockedService.getAccount(22L),-1f), Constants.INVALID_AMOUNT);			
 	}
 	
 	@Test
 	public void makeDepositZeroAmount()
 	{  		 
-	  Assert.assertEquals (accountService.getAccount(22L).makeADeposit(0f), Constants.INVALID_AMOUNT);			
+	  Assert.assertEquals (accountService.makeADeposit(accountMockedService.getAccount(22L),0f), Constants.INVALID_AMOUNT);			
 	}
 	
 	@Test
 	public void makeDepositSuccess()
 	{  		 
-	  Assert.assertEquals (accountService.getAccount(22L).makeADeposit(100f), Constants.SUCCESSFUL_DEPOSIT );			
+	  Assert.assertEquals (accountService.makeADeposit(accountMockedService.getAccount(22L), 100f), Constants.SUCCESSFUL_DEPOSIT );			
 	}
+	
+	
 }

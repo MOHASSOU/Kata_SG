@@ -8,14 +8,18 @@ import org.eclipse.jdt.internal.compiler.ast.ForeachStatement;
 import main.java.beans.Account;
 import main.java.beans.Customer;
 import main.java.transverse.UtilClass;
+import services.Service;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+		
+		Service service = new Service();
+		
 
-		Customer c1 = new Customer("Mohand", "HASSOUNA", "25 rue de Cuques");
-		Account a1 =  c1.createAccount(c1.getCustomerId(), 300f);
-		//c1.createAccount(c1.getCustomerId());
+		Customer c1 = service.createCustomer("Mohand", "HASSOUNA", "25 rue de Cuques");
+		Account a1 =  service.createAccount(c1, 300f);
+		//Account a2 =  service.createAccount(c1.getCustomerId(), 300f);
 		
 		System.out.println("==============================================================");
 		System.out.println("Welcome dear "+ c1.getFirstName() +", what do you want from your bank today ?");
@@ -39,14 +43,14 @@ public class Main {
 			System.out.println("Enter an amount to withdraw : ");
 			Scanner sc1 = new Scanner(System.in);
 			double withdAmount = sc1.nextDouble();
-			System.out.println(a1.makeWithdrawal(withdAmount));
+			System.out.println(service.makeWithdrawal(a1,withdAmount));
 
 			break;
 		case 'C':
 			System.out.println("Enter an amount to deposit : ");
 			Scanner sc2 = new Scanner(System.in);
 			double depositAmount = sc2.nextDouble();
-			System.out.println(a1.makeADeposit(depositAmount));
+			System.out.println(service.makeADeposit(a1, depositAmount));
 			break;
 		case 'D':
 			System.out.println(c1.toString());

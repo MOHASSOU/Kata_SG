@@ -18,7 +18,7 @@ public class Account {
 	private Long customerId;
 	private double overdraft;
 	
-	/** One to many Account -> Operation**/
+	/** One to many Account -> Operation **/
 	private List<Operation> operationList;
 
 	
@@ -59,42 +59,5 @@ public class Account {
 	public void setOperationList(List<Operation> operationList) {
 		this.operationList = operationList;
 	}
-
-
-	
-	
-	
-	public String makeWithdrawal(double amount)
-	{
-		/** Make sure to not withdrawal the negative or zero amount value **/
-		if(amount<=0)
-		{
-			return Constants.INVALID_AMOUNT;
-		}
-		if((overdraft + balance) < amount)
-			return Constants.INSUFFICIENT_BLANCE;
-		else
-		{
-			this.balance -= amount;	
-			this.operationList.add(new Operation (balance, UtilClass.getCurrentDate(), amount, idAccount, UtilClass.operationType.WITHDRAWAL));
-			return Constants.SUCCESSFUL_WITHDRAWAL;
-			
-		}
-		
-	}
-	
-	public String makeADeposit(double amount)
-	{
-		/** Make sure to not deposit the negative or zero amount value **/
-		if(amount<=0)
-		{
-			return Constants.INVALID_AMOUNT;
-		}
-		this.balance += amount;
-		new Operation (balance, UtilClass.getCurrentDate(), amount, idAccount, UtilClass.operationType.DEPOSIT);
-		this.operationList.add(new Operation (balance, UtilClass.getCurrentDate(), amount, idAccount, UtilClass.operationType.DEPOSIT));
-		return Constants.SUCCESSFUL_DEPOSIT;
-	}
-	
 	
 }

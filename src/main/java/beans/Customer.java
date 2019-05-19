@@ -16,7 +16,7 @@ public class Customer {
 	 private String lastName;
 	 private String address;
 	 
-	 /** An array that stocking the id of each account of the customer **/
+	 /** An array that stocking the each account'id of the customer **/
 	 private List <Long> idAccounts;
 	
 	 
@@ -65,11 +65,6 @@ public class Customer {
 					+ ", address=" + address + ", idAccounts=" + idAccounts + "]";
 		}
 	
-	public Account createAccount(Long customerId, double overdraft)
-	{
-		Account account = new Account(customerId, overdraft);
-		this.idAccounts.add(account.getIdAccount());
-		return account;
-	}
+	
 	
 }

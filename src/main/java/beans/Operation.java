@@ -58,8 +58,8 @@ public class Operation {
 	
 	@Override
 	public String toString() {
-		return "Operation [type=" + type + ", balance=" + balance + ", date=" + date + ", amount=" + amount
-				+ ", idAccount=" + accountId + "]";
+		return "Operation [type= " + type + ", balance= " + balance + ", date= " + date + ", amount= " + amount
+				+ ", idAccount= " + accountId + "]";
 	}
 
 }
