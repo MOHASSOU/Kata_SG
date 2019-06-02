@@ -24,18 +24,40 @@ public class CustomerTest {
 	public void createCustomerSuccess() throws Exception
 	{  	
 	
+	 //
+	 // Given
+	 //
 	 Customer customer = customerService.createCustomer("firstNameTest", "lastNameTest", "addressTest");	
-	 Assert.assertEquals (customer.getFirstName(), "firstNameTest" );
-	 Assert.assertEquals (customer.getLastName(), "lastNameTest" );
-	 Assert.assertEquals (customer.getAddress(), "addressTest" );
+	 
+	 //
+	 // When
+	 //
+	 String firstName = customer.getFirstName();
+	 String lastName = customer.getLastName() ;
+	 String address = customer.getAddress();
+	 
+	 //
+	 // Then
+	 //
+	 Assert.assertEquals (firstName, "firstNameTest" );
+	 Assert.assertEquals (lastName, "lastNameTest" );
+	 Assert.assertEquals (address, "addressTest" );
 	}
 	
 	@Test
 	public void createCustomerInvalidParameters() 
-	{  	
+	{  
+	//
+	// When
+	//
 	try {
 		customerService.createCustomer(null, null, null);
-	} catch (Exception e) {
+	} 
+	
+	//
+	// Then
+	//
+	catch (Exception e) {
 		Assert.assertEquals (e.getMessage(), Constants.NULL_OR_INVALID_INFORMATION );
 	}	
 	 

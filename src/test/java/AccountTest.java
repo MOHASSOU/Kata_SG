@@ -54,7 +54,10 @@ public class AccountTest {
 	
 	@Test
 	public void makeWithdrawalNegativeAmount()
-	{		 
+	{	
+	   //
+	   // Given : initTest() 
+	   //
 	   //
 	   // When
 	   //
@@ -86,7 +89,7 @@ public class AccountTest {
 	public void makeWithdrawalSuccess()
 	{
 	   //
-	   // Given
+	   // Given : initTest()
 	   //
 	   accountTest.setBalance(500f);
 	   Mockito.when(accountMockedService.getAccountById(Mockito.anyLong())).thenReturn(accountTest);
@@ -107,7 +110,10 @@ public class AccountTest {
 	
 	@Test
 	public void makeDepositNegativeAmount()
-	{  		 
+	{  	
+	  //
+	  // Given : initTest()
+	  //
 	  //
 	  // When
 	  //
@@ -120,7 +126,10 @@ public class AccountTest {
 	
 	@Test
 	public void makeDepositZeroAmount()
-	{  		
+	{ 
+	  //
+	  // Given : initTest()
+	  //
 	  //
 	  // When
 	  //
@@ -133,7 +142,10 @@ public class AccountTest {
 	
 	@Test
 	public void makeDepositSuccess()
-	{  		
+	{ 
+	  //
+	  // Given : initTest()
+	  //
 	  //
 	  // When
 	  //
@@ -153,7 +165,7 @@ public class AccountTest {
 	public void getOperationsSuccess() throws Exception
 	{  	
 	  //
-	  // Given
+	  // Given : initTest()
 	  //
  	  Account a1 =  accountMockedService.getAccountById(22L);
  	  //
@@ -171,7 +183,7 @@ public class AccountTest {
 	{  		 
 		
 	  //
-	  // Given
+	  // Given : initTest()
       //
 	  Account a1 =  accountMockedService.getAccountById(22L);
 	  //
@@ -195,7 +207,7 @@ public class AccountTest {
 	public void getOperationsWithInvalidAccount() 
 	{  
 	  // 
-	  // Given
+	  // Given : initTest()
 	  //
 	  Account a1 =  accountMockedService.getAccountById(22L);
 	  //
