@@ -71,8 +71,7 @@ public class AccountService {
 		}
 		List <String> operationList = new ArrayList<String>();
 		
-		//account.getOperationList().forEach(i-> operationList.add(i.toString()));
-		operationList.add(account.getOperationList().toString());
+		account.getOperationList().forEach(i-> operationList.add(i.toString()));
 		
 		return operationList;
 	}

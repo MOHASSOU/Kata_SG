@@ -5,7 +5,8 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <build>
-    <sourceDirectory>src</sourceDirectory>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -35,7 +36,7 @@
     <artifactId>mockito-all</artifactId>
     <version>1.9.5</version>
     <scope>test</scope>
-</dependency>
+  </dependency>
 
 <dependency>
     <groupId>junit</groupId>
@@ -60,6 +61,8 @@
   		<artifactId>spring-context</artifactId>
   		<version>5.0.5.RELEASE</version>
   	</dependency>
+  	
+  	
   </dependencies>
 
 </project>

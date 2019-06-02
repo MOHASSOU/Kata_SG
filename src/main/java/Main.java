@@ -55,8 +55,7 @@ public class Main {
 			System.out.println(c1.toString());
 			break;
 		case 'E':
-//			accountService.getAccountsLastOperations(a1).forEach(o->System.out.println(o));
-			System.out.println(accountService.getAccountsLastOperations(a1));
+			accountService.getAccountsLastOperations(a1).forEach(o->System.out.println(o));
 			break;
 		case 'F':
 			System.out.println("Thank you for your visit, see you soon :)");
