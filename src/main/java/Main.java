@@ -12,8 +12,8 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		ApplicationContext appContext = new FileSystemXmlApplicationContext("src/main/resources/app-context.xml");
-		AccountService accountService = appContext.getBean("accountService", AccountService.class);
-		CustomerService customerService = appContext.getBean("customerService", CustomerService.class);
+		AccountService accountService =  appContext.getBean("accountService", AccountService.class);
+		CustomerService customerService =  appContext.getBean("customerService", CustomerService.class);
 		
 		Customer c1 = customerService.createCustomer("Mohand", "HASSOUNA", "25 rue de Cuques");
 		Account a1 =  accountService.createAccount(c1, 300f);
@@ -22,7 +22,7 @@ public class Main {
 		System.out.println("==============================================================");
 		System.out.println("Welcome dear "+ c1.getFirstName() +", what do you want from your bank today ?");
 		System.out.println("==============================================================");
-		
+
 		/** case : the customer has just one account **/
 		if(c1.getIdAccounts().size() == 1)
 		{
@@ -55,7 +55,8 @@ public class Main {
 			System.out.println(c1.toString());
 			break;
 		case 'E':
-			accountService.getAccountsLastOperations(a1).forEach(o->System.out.println(o));
+//			accountService.getAccountsLastOperations(a1).forEach(o->System.out.println(o));
+			System.out.println(accountService.getAccountsLastOperations(a1));
 			break;
 		case 'F':
 			System.out.println("Thank you for your visit, see you soon :)");
