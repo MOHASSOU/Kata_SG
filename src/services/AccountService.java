@@ -19,9 +19,9 @@ public class AccountService {
 	
 	
 	
-	public Account createAccount(Customer customer, double overdraft)
+	public Account createAccount(Customer customer, double overdraft, double initialBalance)
 	{
-		Account account = new Account(customer.getCustomerId(), overdraft);
+		Account account = new Account(customer.getCustomerId(), overdraft, initialBalance);
 		customer.getIdAccounts().add(account.getIdAccount());
 		return account;
 		

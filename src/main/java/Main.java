@@ -16,7 +16,7 @@ public class Main {
 		CustomerService customerService =  appContext.getBean("customerService", CustomerService.class);
 		
 		Customer c1 = customerService.createCustomer("Mohand", "HASSOUNA", "25 rue de Cuques");
-		Account a1 =  accountService.createAccount(c1, 300f);
+		Account a1 =  accountService.createAccount(c1, 300f, 0f);
 		//Account a2 =  service.createAccount(c1.getCustomerId(), 300f);
 		
 		System.out.println("==============================================================");

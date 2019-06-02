@@ -24,7 +24,7 @@ public class AccountTest {
 	public void initTest() 
 	{
 	    accountMockedService = Mockito.mock(AccountService.class);
-	    accountTest = new Account(1L, 300f);
+	    accountTest = new Account(1L, 300f, 0f);
 		Mockito.when(accountMockedService.getAccountById(Mockito.anyLong())).thenReturn(accountTest);
 	}
 	 

@@ -19,11 +19,11 @@ public class Account {
 	private List<Operation> operationList;
 
 	
-	public Account(Long customerId, double overdraft)
+	public Account(Long customerId, double overdraft, double initialBalance)
 	{
 		this.idAccount = nextId.getAndIncrement();
 		this.customerId = customerId;
-		this.balance = 0;
+		this.balance = initialBalance;
 		this.overdraft = overdraft;
 		this.operationList = new ArrayList<>();
 	}
