@@ -36,32 +36,68 @@ public class AccountTest {
 	@Test
 	public void makeWithdrawalBalaceExcessFailure()
 	{
+	   //
+	   // Given
+	   //
 	   accountTest.setBalance(500f);
 	   Mockito.when(accountMockedService.getAccountById(Mockito.anyLong())).thenReturn(accountTest);
-	   Assert.assertEquals (accountService.makeWithdrawal(accountMockedService.getAccountById(22L), 801f), Constants.INSUFFICIENT_BLANCE);
+	   //
+	   // When
+	   //
+	   String resultMessage = accountService.makeWithdrawal(accountMockedService.getAccountById(22L), 801f);
+	   //
+	   // Then
+	   //
+	   Assert.assertEquals (resultMessage, Constants.INSUFFICIENT_BLANCE);
 		
 	}
 	
 	@Test
 	public void makeWithdrawalNegativeAmount()
 	{		 
-	   Assert.assertEquals (accountService.makeWithdrawal(accountMockedService.getAccountById(22L), -1f), Constants.INVALID_AMOUNT);			
+	   //
+	   // When
+	   //
+	   String resultMessage = accountService.makeWithdrawal(accountMockedService.getAccountById(22L), -1f);
+	   //
+	   // Then
+	   //
+	   Assert.assertEquals (resultMessage, Constants.INVALID_AMOUNT);			
 	}
 	
 	@Test
 	public void makeWithdrawalZeroAmount()
 	{
-	 	 
-	   Assert.assertEquals (accountService.makeWithdrawal(accountMockedService.getAccountById(22L), 0f), Constants.INVALID_AMOUNT);	
+	   //
+	   // Given : initTest() 
+	   //
+		
+	   // When
+	   // 
+	   String resultMessage = accountService.makeWithdrawal(accountMockedService.getAccountById(22L), 0f);
+	   
+	   //
+	   // Then
+	   //
+	   Assert.assertEquals (resultMessage, Constants.INVALID_AMOUNT);	
 	}
 	
 	@Test
 	public void makeWithdrawalSuccess()
 	{
+	   //
+	   // Given
+	   //
 	   accountTest.setBalance(500f);
 	   Mockito.when(accountMockedService.getAccountById(Mockito.anyLong())).thenReturn(accountTest);
-		 
-	   Assert.assertEquals (accountService.makeWithdrawal(accountMockedService.getAccountById(22L), 800f), Constants.SUCCESSFUL_WITHDRAWAL);
+	   //
+	   // When
+	   // 
+	   String resultMessage = accountService.makeWithdrawal(accountMockedService.getAccountById(22L), 800f);
+	   //
+	   // Then
+	   //
+	   Assert.assertEquals (resultMessage, Constants.SUCCESSFUL_WITHDRAWAL);
 			
 	}
 	
@@ -72,19 +108,40 @@ public class AccountTest {
 	@Test
 	public void makeDepositNegativeAmount()
 	{  		 
-	  Assert.assertEquals (accountService.makeADeposit(accountMockedService.getAccountById(22L),-1f), Constants.INVALID_AMOUNT);			
+	  //
+	  // When
+	  //
+	  String resultMessage = accountService.makeADeposit(accountMockedService.getAccountById(22L),-1f);
+	  //
+	  // Then
+	  //
+	  Assert.assertEquals (resultMessage, Constants.INVALID_AMOUNT);			
 	}
 	
 	@Test
 	public void makeDepositZeroAmount()
-	{  		 
-	  Assert.assertEquals (accountService.makeADeposit(accountMockedService.getAccountById(22L),0f), Constants.INVALID_AMOUNT);			
+	{  		
+	  //
+	  // When
+	  //
+	  String resultMessage = accountService.makeADeposit(accountMockedService.getAccountById(22L),0f);
+	  // 
+	  // Then
+	  //
+	  Assert.assertEquals (resultMessage, Constants.INVALID_AMOUNT);			
 	}
 	
 	@Test
 	public void makeDepositSuccess()
-	{  		 
-	  Assert.assertEquals (accountService.makeADeposit(accountMockedService.getAccountById(22L), 100f), Constants.SUCCESSFUL_DEPOSIT );			
+	{  		
+	  //
+	  // When
+	  //
+	  String resultMessage = accountService.makeADeposit(accountMockedService.getAccountById(22L), 100f);
+	  //
+	  // Then
+	  //
+	  Assert.assertEquals (resultMessage, Constants.SUCCESSFUL_DEPOSIT );			
 	}
 	
 	/** ###################################################################### **/
@@ -94,35 +151,65 @@ public class AccountTest {
 	
 	@Test
 	public void getOperationsSuccess() throws Exception
-	{  		 
-		Account a1 =  accountMockedService.getAccountById(22L);
-		accountService.makeADeposit(a1, 22f);
-		List<String> operations = accountService.getAccountsLastOperations(a1);
-		 Assert.assertNotNull(operations.get(0));		
+	{  	
+	  //
+	  // Given
+	  //
+ 	  Account a1 =  accountMockedService.getAccountById(22L);
+ 	  //
+ 	  // When
+ 	  // 
+	  accountService.makeADeposit(a1, 22f);
+	  List<String> operations = accountService.getAccountsLastOperations(a1);
+	  //
+	  // Then
+	  //
+	  Assert.assertNotNull(operations.get(0));		
 	}
 	@Test
 	public void getOperationsWithInvalidCustomer() 
 	{  		 
-		Account a1 =  accountMockedService.getAccountById(22L);
-		accountService.makeADeposit(a1, 22f);
-		a1.setCustomerId(null);
-		try {
-			accountService.getAccountsLastOperations(a1);
-		} catch (Exception e) {
-			Assert.assertEquals(e.getMessage(), Constants.INVALID_CUSTOMER);
-		}
+		
+	  //
+	  // Given
+      //
+	  Account a1 =  accountMockedService.getAccountById(22L);
+	  //
+	  // When
+	  //
+      accountService.makeADeposit(a1, 22f);
+      a1.setCustomerId(null);
+	  try {
+	   accountService.getAccountsLastOperations(a1);
+	   } 
+	  // 
+	  // Then
+	  //
+	  catch (Exception e) {
+	  Assert.assertEquals(e.getMessage(), Constants.INVALID_CUSTOMER);
+     }
 			
 	}
 	
 	@Test
 	public void getOperationsWithInvalidAccount() 
-	{  		 
-		Account a1 =  accountMockedService.getAccountById(22L);
-		accountService.makeADeposit(a1, 22f);
-		a1 = null;
-		try {
-			accountService.getAccountsLastOperations(a1);
-		} catch (Exception e) {
+	{  
+	  // 
+	  // Given
+	  //
+	  Account a1 =  accountMockedService.getAccountById(22L);
+	  //
+	  // When
+	  //
+	  accountService.makeADeposit(a1, 22f);
+	  a1 = null;
+	  try {
+		accountService.getAccountsLastOperations(a1);
+		}
+	  //
+	  // Then
+	  //
+	  catch (Exception e) {
 			Assert.assertEquals(e.getMessage(), Constants.INVALID_ACCOUNT);
 		}
 			
